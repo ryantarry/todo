@@ -38,8 +38,8 @@ app.get('/read', async (req, res) => {
 });
 
 app.delete('/delete/:id', async (req, res) => {
-	const id = mongoose.Types.ObjectId(req.params.id.trim());
-	await TodoModel.findByIdAndDelete(id).exec()
+	const id = req.params.id
+	await TodoModel.findByIdAndRemove(id).exec()
 	res.send("deleted")
 });
 

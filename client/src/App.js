@@ -30,10 +30,20 @@ function App() {
     });
   }, []);
 
+  const handleReset = () => {
+    Array.from(document.querySelectorAll("input")).forEach(
+      input => (input.value = "")
+    );
+    this.setState({
+      itemvalues: [{}]
+    });
+  };
+
     return (
         <div className="container">
-          <div className="text-field">
-        <h1>To do App</h1>
+                  <h1>To Do List</h1>
+          <div className="top">
+
         <input type="text"
         placeholder="Write the thing you need to do in here..."
         onChange={(event) => {
@@ -41,17 +51,22 @@ function App() {
           }}
           />
         
-        <button onClick={addTodo}>Add</button>
+        <button type='submit' className='add' onClick={() => {
+          addTodo();
+          handleReset();
+        }}>Add</button>
         </div>
 
         <div>
           {list.map((val) => {
             return(
               <>
+              <div className='entry'>
             <p>{val.todo}</p>
             <button onClick={() => {
               deleteTodo(val._id);
               }}>done</button>
+              </div>
             </>
             )
           }
